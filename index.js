@@ -51,6 +51,28 @@ app.get('/students', async(req, res)=>{
     })
 })
 
+app.get('/student',async(req, res)=>{
+    const email = req.query.email;
+  
+    const student = await Student.findOne({email: email})
+  
+    if(student)
+    {
+      return res.json({
+        success: true,
+        message: "Student fetched successfully",
+        data: student
+      })
+    }
+   
+    res.json({
+      success: false,
+      message: "Student not found",
+      data: null
+    })
+  
+  })
+
 app.listen(5000,()=>{
     console.log('Listen on port 5000');
 })
